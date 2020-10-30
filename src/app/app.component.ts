@@ -7,14 +7,9 @@ import { PhotoService } from './photos/photo/photo.service';
 })
 export class AppComponent implements OnInit {
 
-  photos: any[] = [];
-
-
-  constructor(private photoService: PhotoService) {}
+   constructor() {}
 
   ngOnInit(): void {
-       this.photoService.listFromUser('flavio')
-            .subscribe(photos => this.photos = photos);
 
   }
 
