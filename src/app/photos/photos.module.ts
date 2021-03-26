@@ -9,6 +9,7 @@ import { PhotoListModule } from './photo-list/photo-list.module';
         PhotoModule,
         PhotoFormModule,
         PhotoListModule,
+        
     ]
 })
 export class PhotosModule { }
