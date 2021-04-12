@@ -21,6 +21,7 @@ export class SignInComponent implements OnInit {
              password: ['', Validators.required]
          }
      );
+     this.userNameInput.nativeElement.focus();
 
     }
 
