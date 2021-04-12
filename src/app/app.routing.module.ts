@@ -8,18 +8,19 @@ import { PhotoListResolver } from './photos/photo-list/photo-list.resolver';
 import { SignInComponent } from './home/signin/signin.component';
 import { AuthGuard } from './core/auth/auth.guard';
 import { SignUpComponent } from './home/signup/signup.componente';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
     {
         path: '',
-        component: SignInComponent,
-        canActivate: [AuthGuard]
+        pathMatch: 'full',
+        redirectTo: 'home'
     },
     {
-        path: 'signup',
-        component: SignUpComponent,
+        path: 'home',
+        loadChildren: './home/home.module#HomeModule'
     },
-    { path: '', component: SignInComponent},
+
     { path: 'user/:userName', component: PhotoListComponent,
     resolve: {
         photos: PhotoListResolver
@@ -30,7 +31,7 @@ const routes: Routes = [
 
 @NgModule({
     imports: [
-        RouterModule.forRoot(routes)
+        RouterModule.forRoot(routes , { useHash: true })
     ],
     exports: [RouterModule]
 })
