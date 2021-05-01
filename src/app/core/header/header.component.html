@@ -5,12 +5,12 @@
         <div *ngIf="(user$ | async) as user; else login">
             <i class="fa fa-user-circle"></i>
             <a class="ml-2" style="color: white;">{{ user.name }}</a>
-            <a class="ml-2" (click)="logout()"style="color: white;">> Sair</a>
+            <a class="ml-2" (click)="logout()"style="color: white;">> Logout</a>
         </div>
 
         <ng-template #login>
             <span class="navbar-text" >
-                <a [routerLink]="['']" style="color: white;">Fazer, login!</a>
+                <a [routerLink]="['']" style="color: white;">Login!</a>
             </span>
         </ng-template>
 
