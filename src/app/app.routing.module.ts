@@ -5,10 +5,7 @@ import { PhotoListComponent } from './photos/photo-list/photo-list.component';
 import { PhotoFormComponent } from './photos/photo-form/photo-form.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { PhotoListResolver } from './photos/photo-list/photo-list.resolver';
-import { SignInComponent } from './home/signin/signin.component';
 import { AuthGuard } from './core/auth/auth.guard';
-import { SignUpComponent } from './home/signup/signup.componente';
-import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
     {
@@ -25,7 +22,7 @@ const routes: Routes = [
     resolve: {
         photos: PhotoListResolver
     } },
-    { path: 'p/add', component: PhotoFormComponent },
+    { path: 'p/add', component: PhotoFormComponent, canActivate: [AuthGuard] },
     { path: '**', component: NotFoundComponent },
 ];
 
