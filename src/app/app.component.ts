@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { PhotoService } from './photos/photo/photo.service';
+import { Title } from '@angular/platform-browser';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+import { filter, map, switchMap } from 'rxjs/operators';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -7,10 +9,22 @@ import { PhotoService } from './photos/photo/photo.service';
 })
 export class AppComponent implements OnInit {
 
-   constructor() {}
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private titleService: Title) {
 
-  ngOnInit(): void {
+    }
 
-  }
-
+    ngOnInit(): void {
+      this.router.events
+        .pipe(filter(event => event instanceof NavigationEnd))
+        .pipe(map(() => this.activatedRoute))
+        .pipe(map(route => {
+          while(route.firstChild) route = route.firstChild;
+          return route;
+        }))
+        .pipe(switchMap(route => route.data))
+        .subscribe(event => this.titleService.setTitle(event.title));
+      } 
 }
