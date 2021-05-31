@@ -3,6 +3,8 @@ import { ErrorHandler, Injectable, Injector } from '@angular/core';
 import * as StackTrace from 'stacktrace-js';
 import { UserService } from 'src/app/core/user/user.service';
 import { ServerLogService } from './server-log.service';
+import { Router } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class GlobalErrorHandler implements ErrorHandler {
@@ -21,11 +23,12 @@ export class GlobalErrorHandler implements ErrorHandler {
             ? location.path()
             : '';
         const serverLogService = this.injector.get(ServerLogService);
-
+        const router = this.injector.get(Router);
         const message = error.message
             ? error.message :
             error.toString();
 
+            if(environment.production) { router.navigate(['/error']); }
         StackTrace
             .fromError(error)
             .then(stackFrames => {

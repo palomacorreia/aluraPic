@@ -1,8 +1,9 @@
-<form [formGroup]="signupForm" class="form mt-4">
+<h4 class="text-center">Register to embrace a new world!</h4>
+<form #form="ngForm" [formGroup]="signupForm" class="form mt-4" (submit)="signup()">
     <div class="form-group">
         <input #emailInput formControlName="email" class="form-control" placeholder="email" autofocus>
         <app-vmessage
-            *ngIf="signupForm.get('email').errors?.required"
+            *ngIf="signupForm.get('email').errors?.required  && form.submitted"
             text="Email is required!">
         </app-vmessage>
         <app-vmessage
@@ -14,7 +15,7 @@
     <div class="form-group">
         <input formControlName="fullName" class="form-control" placeholder="full name">
         <app-vmessage
-            *ngIf="signupForm.get('fullName').errors?.required"
+            *ngIf="signupForm.get('fullName').errors?.required  && form.submitted"
             text="Full name is required!">
         </app-vmessage>
         <app-vmessage
@@ -30,7 +31,7 @@
     <div class="form-group">
         <input formControlName="userName" class="form-control" placeholder="user name">
         <app-vmessage
-            *ngIf="signupForm.get('userName').errors?.required"
+            *ngIf="signupForm.get('userName').errors?.required  && form.submitted"
             text="Username is required!">
         </app-vmessage>
         <app-vmessage
@@ -53,7 +54,7 @@
     <div class="form-group">
         <input formControlName="password" type="password" class="form-control" placeholder="password">
         <app-vmessage
-            *ngIf="signupForm.get('password').errors?.required"
+            *ngIf="signupForm.get('password').errors?.required  && form.submitted"
             text="Password is required!">
         </app-vmessage>
         <app-vmessage
@@ -64,9 +65,13 @@
             *ngIf="signupForm.get('password').errors?.maxlength"
             text="Maximum length is 14">
         </app-vmessage>
+        <app-vmessage 
+        *ngIf="signupForm.errors?.userNamePassword"
+        text="Username and password must be different">
+       </app-vmessage>
     </div>
 
-    <button [disabled]="signupForm.invalid || signupForm.pending" class="btn btn-primary btn-block"         style="background-color: #416C81"
+    <button class="btn btn-primary btn-block" style="background-color: #416C81"
     >Register</button>
     <p>Already a user? <a [routerLink]="['']">Sign In!</a></p>
 </form>
