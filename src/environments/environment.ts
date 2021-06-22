@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:3000',
+  apiUrl: 'https://api-alurapic-photos.herokuapp.com',
   serverLog: 'http://localhost:7000'
 
 };
