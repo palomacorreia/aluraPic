@@ -1,4 +1,3 @@
-import { TestBed } from '@angular/core/testing';
 import { TokenService } from './token.service';
 
 describe(`O serviço #${TokenService.name}`, () => {
